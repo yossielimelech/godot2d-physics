@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-idle-00.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-idle-03.png" type="Texture" id=2]
@@ -26,12 +26,35 @@
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack1-01.png" type="Texture" id=24]
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack1-03.png" type="Texture" id=25]
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack1-02.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-04.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-02.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-01.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-00.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack1-04.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-04.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-03.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-05.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-00.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-03.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack2-01.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-05.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-02.png" type="Texture" id=39]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": false,
 "name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "AirAttack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "Fall",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
@@ -44,19 +67,19 @@ animations = [ {
 "name": "Run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 31 ) ],
 "loop": false,
-"name": "Attack",
+"name": "Attack1",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 35 ), ExtResource( 29 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 38 ) ],
 "loop": false,
-"name": "Fall",
-"speed": 5.0
+"name": "Attack3",
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ],
+"frames": [ ExtResource( 30 ), ExtResource( 37 ), ExtResource( 28 ), ExtResource( 33 ), ExtResource( 32 ), ExtResource( 34 ) ],
 "loop": false,
-"name": "AirAttack",
+"name": "Attack2",
 "speed": 10.0
 } ]
 
@@ -65,8 +88,8 @@ script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "AirAttack"
-frame = 3
+animation = "Attack1"
+frame = 4
 playing = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 12 )]

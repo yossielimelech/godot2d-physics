@@ -20,6 +20,8 @@ var direction : int
 var attacking : bool
 var air_attack : bool
 
+var attack_animations = {"Attack1" : 4, "Attack2" : 5, "Attack3" : 5 }
+
 func _process(delta):
 	on_ground = Game.check_walls_collision(self, Vector2.DOWN)
 	
@@ -30,11 +32,7 @@ func _process(delta):
 	
 	direction = sign(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))	
 	
-	if(animated_sprite.animation == "Attack" && animated_sprite.frame == animated_sprite.frames.frames.size()):
-		attacking = false;
-	
-	if(animated_sprite.animation == "AirAttack" && animated_sprite.frame == animated_sprite.frames.frames.size()):
-		air_attack = false;
+	CheckIfAttackAnimationEnded()
 	
 	if !attacking && !air_attack:
 		var attack = Input.is_action_just_pressed("Attack")
@@ -78,12 +76,20 @@ func _process(delta):
 	move_x(velocity.x * delta, funcref(self, "on_collision_x"))
 	move_y(velocity.y * delta, funcref(self, "on_collision_y"))
 
+func CheckIfAttackAnimationEnded():
+	for attack in attack_animations:
+		if(animated_sprite.animation == attack && animated_sprite.frame == attack_animations[attack]):
+			attacking = false
+		
+	if(animated_sprite.animation == "AirAttack" && animated_sprite.frame == 3):
+		air_attack = false;
+
 func PlayCorrectAnimation(velocity):
 	if air_attack:
 		PlayUniqueAnimation("AirAttack")
 		return
 	if attacking:
-		PlayUniqueAnimation("Attack")
+		PlayUniqueAnimation(GetRandomGroundAttack())
 		return
 	if !on_ground:
 		if velocity.y < 0:
@@ -97,10 +103,15 @@ func PlayCorrectAnimation(velocity):
 			PlayUniqueAnimation("Idle")
 
 func PlayUniqueAnimation(animation):
+	if(animated_sprite.is_playing()  && attack_animations.has(animation) && attack_animations.has(animated_sprite.animation)):
+		return
 	if(animated_sprite.is_playing() && animated_sprite.animation == animation):
 		return
 	animated_sprite.play(animation)
 
+func GetRandomGroundAttack():
+	var i = randi() % 3 + 1
+	return "Attack%s" % i
 
 func on_collision_x():
 	velocity.x = 0
