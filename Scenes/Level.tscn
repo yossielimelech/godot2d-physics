@@ -93,6 +93,27 @@ position = Vector2( 304, 160 )
 [node name="Wall20" parent="Walls" instance=ExtResource( 2 )]
 position = Vector2( 288, 160 )
 
+[node name="Wall28" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 0, 144 )
+
+[node name="Wall29" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 0, 128 )
+
+[node name="Wall30" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 0, 112 )
+
+[node name="Wall31" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 304, 144 )
+
+[node name="Wall32" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 304, 128 )
+
+[node name="Wall33" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 304, 112 )
+
+[node name="Wall34" parent="Walls" instance=ExtResource( 2 )]
+position = Vector2( 304, 96 )
+
 [node name="MovingPlatform" parent="." instance=ExtResource( 3 )]
 position = Vector2( 184, 128 )
 jump_thru = true
