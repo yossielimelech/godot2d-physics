@@ -78,10 +78,10 @@ func _process(delta):
 
 func CheckIfAttackAnimationEnded():
 	for attack in attack_animations:
-		if(animated_sprite.animation == attack && animated_sprite.frame == attack_animations[attack]):
+		if(animated_sprite.animation == attack && animated_sprite.frame == animated_sprite.frames.get_frame_count(attack) - 1):
 			attacking = false
 		
-	if(animated_sprite.animation == "AirAttack" && animated_sprite.frame == 3):
+	if(animated_sprite.animation == "AirAttack" && animated_sprite.frame ==  animated_sprite.frames.get_frame_count("AirAttack") - 1):
 		air_attack = false;
 
 func PlayCorrectAnimation(velocity):
