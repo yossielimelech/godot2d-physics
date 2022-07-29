@@ -9,8 +9,6 @@ var run_deccel = 500
 var gravity = 1000
 var max_fall = 160
 var jump_force = -160
-var jump_hold_time = 0.2
-var local_hold_time = 0
 var cayote_time = 0.1
 var local_cayote_time = 0
 
@@ -35,7 +33,7 @@ func _process(delta):
 	CheckIfAttackAnimationEnded()
 	
 	if !attacking && !air_attack:
-		var attack = Input.is_action_just_pressed("Attack")
+		var attack = InputManager.Attack.Pressed
 		if on_ground:
 			attacking = attack
 		else:
@@ -45,18 +43,14 @@ func _process(delta):
 	else:
 		air_attack = !on_ground
 	
-
-	var jumping = Input.is_action_just_pressed("jump")
-	if jumping && (on_ground || local_cayote_time > 0):
-		velocity.y = jump_force
-		local_hold_time = jump_hold_time
-	elif local_hold_time > 0:
-		if Input.is_action_pressed("jump"):
-			velocity.y = jump_force
-		else:
-			local_hold_time = 0
 	
-	local_hold_time -= delta
+	if InputManager.Jump.Pressed && (on_ground || local_cayote_time > 0):
+		InputManager.Jump.Consume()
+		velocity.y = jump_force
+	elif !on_ground && InputManager.Jump.Holds:
+		velocity.y = jump_force
+	
+	
 	local_cayote_time -= delta
 	
 	if direction > 0:

@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "BufferedInput",
+"language": "GDScript",
+"path": "res://Scripts/BufferedInput.gd"
+} ]
 _global_script_class_icons={
+"BufferedInput": ""
 }
 
 [application]
@@ -21,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Game="*res://Scripts/Game.gd"
+InputManager="*res://Scripts/InputManager.gd"
 
 [display]
 
@@ -56,7 +63,7 @@ texture={
 
 [input]
 
-jump={
+Jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]

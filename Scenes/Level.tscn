@@ -1,9 +1,72 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/MovingPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/FadingPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Tiles/Assets.png" type="Texture" id=5]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Assets.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 24, 16, 8, 8 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 219, Vector2( 2, 2 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 8, 8 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "Assets.png 1"
+1/texture = ExtResource( 5 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 32, 0, 8, 8 )
+1/tile_mode = 1
+1/autotile/bitmask_mode = 1
+1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 63, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 27 ]
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 8, 8 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "Assets.png 2"
+2/texture = ExtResource( 5 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 32, 0, 8, 8 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
 
 [node name="Level" type="Node2D"]
 
@@ -34,19 +97,19 @@ position = Vector2( 48, 144 )
 position = Vector2( 64, 144 )
 
 [node name="Wall23" parent="Walls" instance=ExtResource( 2 )]
-position = Vector2( 120, 144 )
+position = Vector2( 128, 144 )
 
 [node name="Wall24" parent="Walls" instance=ExtResource( 2 )]
-position = Vector2( 136, 144 )
+position = Vector2( 144, 144 )
 
 [node name="Wall25" parent="Walls" instance=ExtResource( 2 )]
-position = Vector2( 152, 144 )
+position = Vector2( 160, 144 )
 
 [node name="Wall26" parent="Walls" instance=ExtResource( 2 )]
-position = Vector2( 136, 128 )
+position = Vector2( 144, 128 )
 
 [node name="Wall27" parent="Walls" instance=ExtResource( 2 )]
-position = Vector2( 152, 128 )
+position = Vector2( 160, 128 )
 
 [node name="Wall6" parent="Walls" instance=ExtResource( 2 )]
 position = Vector2( 80, 160 )
@@ -126,3 +189,8 @@ offset = Vector2( -48, 0 )
 [node name="FadingPlatform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 128, 88 )
 jump_thru = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1

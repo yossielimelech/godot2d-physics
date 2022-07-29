@@ -7,4 +7,4 @@
 script = ExtResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
-color = Color( 0.686275, 0, 1, 0.501961 )
+color = Color( 0.686275, 0, 1, 0.137255 )
