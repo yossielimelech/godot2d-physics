@@ -16,6 +16,8 @@ func can_enter():
 func update(delta):
 	if _parent.direction == 0 && _parent.velocity.x == 0:
 		return _machine.Idle
+	if !_parent.on_ground:
+		return _machine.Dropped
 
 func animate(delta):
 	_parent.PlayUniqueAnimation("Run")

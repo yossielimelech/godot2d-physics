@@ -1,21 +1,25 @@
 extends "res://Scripts/State.gd"
-class_name IdleState
+class_name DroppedState
 
 func on_enter():
 	pass
-
+	
 func on_exit():
 	pass
 
 func _init(name: String, parent: Object, machine).(name, parent, machine):
 	pass
-	
+
 func can_enter():
-	return _machine.State == _machine.Idle
+	return false
 
 func update(delta):
-	pass
-	
 
+	if _parent.on_ground:
+		if _parent.get_direction() != 0:
+			return _machine.Run
+		else:
+			return _machine.Idle
+	
 func animate(delta):
-	_parent.PlayUniqueAnimation("Idle")
+	_parent.PlayUniqueAnimation("Fall")

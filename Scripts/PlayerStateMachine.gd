@@ -7,6 +7,7 @@ onready var Attack = AttackState.new("Attack", _parent, self)
 onready var AirAttack = AirAttackState.new("AirAttack", _parent, self)
 onready var Jump = JumpState.new("Jump", _parent, self)
 onready var Run = RunState.new("Run", _parent, self)
+onready var Dropped = DroppedState.new("Dropped", _parent, self)
 onready var Idle = IdleState.new("Idle", _parent, self)
 
 
@@ -15,6 +16,7 @@ func _ready():
 	add_state(AirAttack)
 	add_state(Jump)
 	add_state(Run)
+	add_state(Dropped)
 	add_state(Idle)
 	
 	set_state("Idle")
