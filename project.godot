@@ -10,12 +10,66 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "AirAttackState",
+"language": "GDScript",
+"path": "res://Scripts/AirAttackState.gd"
+}, {
+"base": "Node",
+"class": "AttackState",
+"language": "GDScript",
+"path": "res://Scripts/AttackState.gd"
+}, {
+"base": "Node",
 "class": "BufferedInput",
 "language": "GDScript",
 "path": "res://Scripts/BufferedInput.gd"
+}, {
+"base": "Node",
+"class": "IdleState",
+"language": "GDScript",
+"path": "res://Scripts/IdleState.gd"
+}, {
+"base": "Node",
+"class": "JumpState",
+"language": "GDScript",
+"path": "res://Scripts/JumpState.gd"
+}, {
+"base": "Node2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+}, {
+"base": "Node",
+"class": "PlayerStateMachine",
+"language": "GDScript",
+"path": "res://Scripts/PlayerStateMachine.gd"
+}, {
+"base": "Node",
+"class": "RunState",
+"language": "GDScript",
+"path": "res://Scripts/RunState.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Scripts/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
-"BufferedInput": ""
+"AirAttackState": "",
+"AttackState": "",
+"BufferedInput": "",
+"IdleState": "",
+"JumpState": "",
+"Player": "",
+"PlayerStateMachine": "",
+"RunState": "",
+"State": "",
+"StateMachine": ""
 }
 
 [application]
