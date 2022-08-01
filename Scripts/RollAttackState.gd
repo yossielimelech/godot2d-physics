@@ -1,9 +1,9 @@
 extends "res://Scripts/State.gd"
-class_name DroppedState
+class_name RollAttackState
 
 func on_enter():
-	pass
-	
+	InputManager.Attack.Consume()
+
 func on_exit():
 	pass
 
@@ -11,15 +11,13 @@ func _init(name: String, parent: Object, machine).(name, parent, machine):
 	pass
 
 func can_enter():
-	return false
+	pass
 
 func update(delta):
-	if _parent.on_ground:
-		if _parent.get_direction() != 0:
-			return _machine.Run
-		else:
-			return _machine.Idle
-
+	_parent.direction = 0
+	
+	if _parent.AnimationEnded("Attack3"):
+		return _machine.Idle
 
 func animate(delta):
-	_parent.PlayUniqueAnimation("Fall")
+	_parent.PlayUniqueAnimation("Attack3")

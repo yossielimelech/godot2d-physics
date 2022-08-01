@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-idle-00.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-idle-03.png" type="Texture" id=2]
@@ -40,9 +40,59 @@
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-05.png" type="Texture" id=38]
 [ext_resource path="res://Sprites/Individual Sprites/adventurer-attack3-02.png" type="Texture" id=39]
 [ext_resource path="res://Scripts/PlayerStateMachine.gd" type="Script" id=40]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-smrslt-03.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-smrslt-00.png" type="Texture" id=42]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-smrslt-01.png" type="Texture" id=43]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-smrslt-02.png" type="Texture" id=44]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack3-loop-00.png" type="Texture" id=45]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack3-loop-01.png" type="Texture" id=46]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack3-rdy-00.png" type="Texture" id=47]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack-3-end-00.png" type="Texture" id=48]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack-3-end-01.png" type="Texture" id=49]
+[ext_resource path="res://Sprites/Individual Sprites/adventurer-air-attack-3-end-02.png" type="Texture" id=50]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
+"loop": false,
+"name": "Roll",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "AirAttack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Run",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ) ],
+"loop": false,
+"name": "DropAttack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
+"loop": false,
+"name": "DropAttackEnd",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 29 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 38 ) ],
+"loop": false,
+"name": "Attack3",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
 "loop": false,
 "name": "Fall",
@@ -53,35 +103,10 @@ animations = [ {
 "name": "Attack2",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ],
-"loop": false,
-"name": "AirAttack",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Run",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 31 ) ],
 "loop": false,
 "name": "Attack1",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 35 ), ExtResource( 29 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 38 ) ],
-"loop": false,
-"name": "Attack3",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
-"loop": false,
-"name": "Jump",
-"speed": 5.0
 } ]
 
 [node name="Player" type="Node2D"]
@@ -89,16 +114,22 @@ script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Attack1"
-frame = 4
+animation = "DropAttackEnd"
+frame = 2
 playing = true
 
-[node name="Hitbox" parent="." instance=ExtResource( 12 )]
-visible = false
+[node name="NormalHitbox" parent="." instance=ExtResource( 12 )]
 x = -4
 y = -7
 width = 8
 height = 24
+
+[node name="RollHitbox" parent="." instance=ExtResource( 12 )]
+visible = false
+x = -4
+y = 1
+width = 8
+color = Color( 0, 1, 0.623529, 0.501961 )
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 40 )
@@ -110,3 +141,22 @@ margin_right = 30.0
 margin_bottom = -7.0
 rect_scale = Vector2( 0.5, 0.5 )
 align = 1
+
+[node name="DropAttackRays" type="Node2D" parent="."]
+
+[node name="DropAttackRayCenter" type="RayCast2D" parent="DropAttackRays"]
+enabled = true
+collision_mask = 2
+collide_with_areas = true
+
+[node name="DropAttackRayRight" type="RayCast2D" parent="DropAttackRays"]
+position = Vector2( 4, 0 )
+enabled = true
+collision_mask = 2
+collide_with_areas = true
+
+[node name="DropAttackRayLeft" type="RayCast2D" parent="DropAttackRays"]
+position = Vector2( -4, 0 )
+enabled = true
+collision_mask = 2
+collide_with_areas = true

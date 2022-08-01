@@ -2,9 +2,12 @@ extends "res://Scripts/Actor.gd"
 class_name Player
 
 onready var animated_sprite = $AnimatedSprite
-onready var hitbox = $Hitbox
+onready var normal_hitbox = $NormalHitbox
+onready var hitbox = normal_hitbox
+onready var roll_hitbox = $RollHitbox
 onready var stateMachine = $PlayerStateMachine
 onready var stateLabel = $Label
+onready var drop_attack_rays_node = $DropAttackRays
 
 var velocity = Vector2.ZERO
 var max_run = 100
@@ -13,8 +16,11 @@ var run_deccel = 500
 var gravity = 1000
 var max_fall = 160
 var jump_force = -160
+var roll_force = 240
+var dodge_force = 160
 var cayote_time = 0.1
 var local_cayote_time = 0
+var face : int setget ,get_face
 
 var on_ground : bool
 var was_on_ground : bool
@@ -22,12 +28,11 @@ var direction : int
 var attacking : bool
 var air_attack : bool
 
-var attack_animations = {"Attack1" : 4, "Attack2" : 5, "Attack3" : 5 }
+var attack_animations = {"Attack1" : 4, "Attack2" : 5}
 
 func _process(delta):
 	
 	stateLabel.text = stateMachine.State.Name
-	
 	if direction > 0:
 		animated_sprite.flip_h = false
 	elif direction < 0:
@@ -59,13 +64,20 @@ func _physics_process(delta):
 	move_x(velocity.x * delta, funcref(self, "on_collision_x"))
 	move_y(velocity.y * delta, funcref(self, "on_collision_y"))
 
+func get_face():
+	if animated_sprite.flip_h:
+		return -1
+	else:
+		return 1
+	
+
 func AttackAnimationEnded():
 	for attack in attack_animations:
 		if(animated_sprite.animation == attack && animated_sprite.frame == animated_sprite.frames.get_frame_count(attack) - 1):
 			return true
 			
-func AirAttackAnimationEnded():
-	if(animated_sprite.animation == "AirAttack" && animated_sprite.frame ==  animated_sprite.frames.get_frame_count("AirAttack") - 1):
+func AnimationEnded(animation):
+	if(animated_sprite.animation == animation && animated_sprite.frame ==  animated_sprite.frames.get_frame_count(animation) - 1):
 		return true
 
 func PlayCorrectAnimation(velocity):
@@ -104,7 +116,7 @@ func PlayAttackAnimation():
 	PlayUniqueAnimation(GetRandomGroundAttack())
 
 func GetRandomGroundAttack():
-	var i = randi() % 3 + 1
+	var i = randi() % 2 + 1
 	return "Attack%s" % i
 
 func on_collision_x():
@@ -123,3 +135,8 @@ func squish():
 func get_direction():
 	return sign(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
 
+func drop_attack_rays_colliding():
+	for child in drop_attack_rays_node.get_children():
+		if child.is_colliding():
+			return true
+	return false

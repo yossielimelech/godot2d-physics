@@ -15,8 +15,8 @@ func can_enter():
 		return true
 
 func update(delta):
-	if _parent.AirAttackAnimationEnded():
-		return _machine.Jump
+	if _parent.AnimationEnded("AirAttack"):
+		return _machine.Dropped
 
 func animate(delta):
 	_parent.PlayUniqueAnimation("AirAttack")

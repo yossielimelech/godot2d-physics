@@ -25,6 +25,16 @@ _global_script_classes=[ {
 "path": "res://Scripts/BufferedInput.gd"
 }, {
 "base": "Node",
+"class": "DodgeState",
+"language": "GDScript",
+"path": "res://Scripts/DodgeState.gd"
+}, {
+"base": "Node",
+"class": "DropAttackState",
+"language": "GDScript",
+"path": "res://Scripts/DropAttackState.gd"
+}, {
+"base": "Node",
 "class": "DroppedState",
 "language": "GDScript",
 "path": "res://Scripts/DroppedState.gd"
@@ -50,6 +60,16 @@ _global_script_classes=[ {
 "path": "res://Scripts/PlayerStateMachine.gd"
 }, {
 "base": "Node",
+"class": "RollAttackState",
+"language": "GDScript",
+"path": "res://Scripts/RollAttackState.gd"
+}, {
+"base": "Node",
+"class": "RollState",
+"language": "GDScript",
+"path": "res://Scripts/RollState.gd"
+}, {
+"base": "Node",
 "class": "RunState",
 "language": "GDScript",
 "path": "res://Scripts/RunState.gd"
@@ -68,11 +88,15 @@ _global_script_class_icons={
 "AirAttackState": "",
 "AttackState": "",
 "BufferedInput": "",
+"DodgeState": "",
+"DropAttackState": "",
 "DroppedState": "",
 "IdleState": "",
 "JumpState": "",
 "Player": "",
 "PlayerStateMachine": "",
+"RollAttackState": "",
+"RollState": "",
 "RunState": "",
 "State": "",
 "StateMachine": ""
@@ -128,9 +152,14 @@ Jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-Attack={
+Roll={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

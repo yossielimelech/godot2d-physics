@@ -5,8 +5,12 @@ onready var _parent = get_parent()
 
 onready var Attack = AttackState.new("Attack", _parent, self)
 onready var AirAttack = AirAttackState.new("AirAttack", _parent, self)
+onready var RollAttack = RollAttackState.new("RollAttack", _parent, self)
+onready var Dodge = DodgeState.new("Dodge", _parent, self)
+onready var Roll = RollState.new("Roll", _parent, self)
 onready var Jump = JumpState.new("Jump", _parent, self)
 onready var Run = RunState.new("Run", _parent, self)
+onready var DropAttack = DropAttackState.new("DropAttack", _parent, self)
 onready var Dropped = DroppedState.new("Dropped", _parent, self)
 onready var Idle = IdleState.new("Idle", _parent, self)
 
@@ -14,8 +18,12 @@ onready var Idle = IdleState.new("Idle", _parent, self)
 func _ready():
 	add_state(Attack)
 	add_state(AirAttack)
+	add_state(RollAttack)
+	add_state(Dodge)
+	add_state(Roll)
 	add_state(Jump)
 	add_state(Run)
+	add_state(DropAttack)
 	add_state(Dropped)
 	add_state(Idle)
 	
@@ -28,6 +36,7 @@ func update(delta):
 		if new_state != null:
 			_state.on_exit()
 			_state = new_state
+			_state.on_enter()
 		else:
 			for curr_state in states:
 				if states[curr_state].can_enter():
