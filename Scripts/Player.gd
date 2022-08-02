@@ -1,12 +1,19 @@
 extends "res://Scripts/Actor.gd"
 class_name Player
 
+signal on_stamina_update
+signal on_max_stamina_update
+
+export var max_stamina = 100
+onready var stamina = max_stamina
+onready var stamina_per_second = 5
+
 onready var animated_sprite = $AnimatedSprite
 onready var normal_hitbox = $NormalHitbox
 onready var hitbox = normal_hitbox
 onready var roll_hitbox = $RollHitbox
 onready var stateMachine = $PlayerStateMachine
-onready var stateLabel = $Label
+onready var stateLabel = $State
 onready var drop_attack_rays_node = $DropAttackRays
 
 var velocity = Vector2.ZERO
@@ -25,10 +32,13 @@ var face : int setget ,get_face
 var on_ground : bool
 var was_on_ground : bool
 var direction : int
-var attacking : bool
-var air_attack : bool
 
 var attack_animations = {"Attack1" : 4, "Attack2" : 5}
+
+func _ready():
+	emit_signal("on_max_stamina_update", max_stamina)
+	emit_signal("on_stamina_update", stamina, 0)
+
 
 func _process(delta):
 	
@@ -41,6 +51,8 @@ func _process(delta):
 	stateMachine.animate(delta)
 
 func _physics_process(delta):
+	
+	consume_stamina(-delta * stamina_per_second)
 	on_ground = Game.check_walls_collision(self, Vector2.DOWN)
 	
 	if(was_on_ground && !on_ground):
@@ -80,30 +92,6 @@ func AnimationEnded(animation):
 	if(animated_sprite.animation == animation && animated_sprite.frame ==  animated_sprite.frames.get_frame_count(animation) - 1):
 		return true
 
-func PlayCorrectAnimation(velocity):
-	
-	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
-		animated_sprite.flip_h = true
-		
-	if air_attack:
-		PlayUniqueAnimation("AirAttack")
-		return
-	if attacking:
-		PlayUniqueAnimation(GetRandomGroundAttack())
-		return
-	if !on_ground:
-		if velocity.y < 0:
-			PlayUniqueAnimation("Jump")
-		else:
-			PlayUniqueAnimation("Fall")
-	else:
-		if direction != 0:
-			PlayUniqueAnimation("Run")
-		else:
-			PlayUniqueAnimation("Idle")
-
 func PlayUniqueAnimation(animation):
 	if(animated_sprite.is_playing()  && attack_animations.has(animation) && attack_animations.has(animated_sprite.animation)):
 		return
@@ -140,3 +128,11 @@ func drop_attack_rays_colliding():
 		if child.is_colliding():
 			return true
 	return false
+	
+func consume_stamina(amount):
+	stamina -= amount
+	if stamina < 0:
+		stamina = 0
+	elif stamina > max_stamina:
+		stamina = max_stamina
+	emit_signal("on_stamina_update", stamina, amount)

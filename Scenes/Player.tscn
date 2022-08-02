@@ -68,15 +68,15 @@ animations = [ {
 "name": "AirAttack",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Run",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Run",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ) ],
 "loop": false,
@@ -86,6 +86,11 @@ animations = [ {
 "frames": [ ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
 "loop": false,
 "name": "DropAttackEnd",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 31 ) ],
+"loop": false,
+"name": "Attack1",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 35 ), ExtResource( 29 ), ExtResource( 39 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 38 ) ],
@@ -101,11 +106,6 @@ animations = [ {
 "frames": [ ExtResource( 30 ), ExtResource( 37 ), ExtResource( 28 ), ExtResource( 33 ), ExtResource( 32 ), ExtResource( 34 ) ],
 "loop": false,
 "name": "Attack2",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 31 ) ],
-"loop": false,
-"name": "Attack1",
 "speed": 10.0
 } ]
 
@@ -134,7 +134,7 @@ color = Color( 0, 1, 0.623529, 0.501961 )
 [node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource( 40 )
 
-[node name="Label" type="Label" parent="."]
+[node name="State" type="Label" parent="."]
 margin_left = -10.0
 margin_top = -21.0
 margin_right = 30.0

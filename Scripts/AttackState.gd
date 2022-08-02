@@ -1,8 +1,11 @@
 extends "res://Scripts/State.gd"
 class_name AttackState
 
+var stamina_usage = 15
+
 func on_enter():
 	InputManager.Attack.Consume()
+	_parent.consume_stamina(stamina_usage)
 
 func on_exit():
 	pass

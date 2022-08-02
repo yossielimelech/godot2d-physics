@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/MovingPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/FadingPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Bar.tscn" type="PackedScene" id=5]
 
 [node name="Level" type="Node2D"]
+
+[node name="Hud" type="CanvasLayer" parent="."]
+
+[node name="StaminaBar" parent="Hud" instance=ExtResource( 5 )]
+process_priority = 1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 72 )
@@ -126,3 +132,6 @@ offset = Vector2( -48, 0 )
 [node name="FadingPlatform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 128, 88 )
 jump_thru = true
+
+[connection signal="on_max_stamina_update" from="Player" to="Hud/StaminaBar" method="_on_max_value_update"]
+[connection signal="on_stamina_update" from="Player" to="Hud/StaminaBar" method="_on_value_update"]
