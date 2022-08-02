@@ -16,7 +16,7 @@ func _init(name: String, parent: Object, machine, stamina : int = 0).(name, pare
 func can_enter():
 	if !.can_enter():
 		return false
-	if _machine.State == _machine.Jump || [_machine.Idle, _machine.Run].has(_machine.State) && InputManager.Jump.Pressed && (_parent.on_ground || _parent.local_cayote_time > 0):
+	if _machine.State == _machine.Jump || [_machine.Idle, _machine.Run, _machine.Dropped].has(_machine.State) && InputManager.Jump.Pressed && (_parent.on_ground || _parent.local_cayote_time > 0):
 		return true
 
 func update(delta):

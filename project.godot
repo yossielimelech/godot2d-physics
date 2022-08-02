@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/DroppedState.gd"
 }, {
 "base": "Node",
+"class": "GameResource",
+"language": "GDScript",
+"path": "res://Scripts/GameResource.gd"
+}, {
+"base": "Node",
 "class": "IdleState",
 "language": "GDScript",
 "path": "res://Scripts/IdleState.gd"
@@ -91,6 +96,7 @@ _global_script_class_icons={
 "DodgeState": "",
 "DropAttackState": "",
 "DroppedState": "",
+"GameResource": "",
 "IdleState": "",
 "JumpState": "",
 "Player": "",

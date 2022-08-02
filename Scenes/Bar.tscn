@@ -1,66 +1,29 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Bar.gd" type="Script" id=1]
-[ext_resource path="res://Themes/barFG.tres" type="Theme" id=2]
-
-[sub_resource type="Theme" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.882353, 0.843137, 0.301961, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.8, 0.8, 0.8, 0 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 1, 1, 1, 0 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 1, 1, 1, 0 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0.517647, 0.0431373, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.8, 0.8, 0.8, 0 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 1, 1, 1, 0.145098 )
-border_blend = true
+[ext_resource path="res://Themes/stamina_bar.tres" type="Theme" id=2]
+[ext_resource path="res://Themes/stamina_bar_bg.tres" type="Theme" id=3]
 
 [node name="Bar" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.3
+anchor_bottom = 0.022
+margin_bottom = 0.0399997
 script = ExtResource( 1 )
 
 [node name="BG" type="ProgressBar" parent="."]
-margin_right = 96.0
-margin_bottom = 5.0
-rect_min_size = Vector2( 0, 5 )
-theme = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 2 )
+theme = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
 value = 50.0
 percent_visible = false
 
 [node name="FG" type="ProgressBar" parent="."]
-margin_right = 96.0
-margin_bottom = 5.0
-rect_min_size = Vector2( 0, 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 2 )
 theme = ExtResource( 2 )
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
 value = 50.0
 percent_visible = false
 

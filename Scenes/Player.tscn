@@ -73,6 +73,16 @@ animations = [ {
 "name": "DropAttack",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
+"loop": false,
+"name": "Roll",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
 "loop": false,
 "name": "DropAttackEnd",
@@ -97,16 +107,6 @@ animations = [ {
 "loop": false,
 "name": "Attack2",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
-"loop": false,
-"name": "Roll",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
-"loop": false,
-"name": "Jump",
-"speed": 5.0
 } ]
 
 [node name="Player" type="Node2D"]
@@ -119,6 +119,7 @@ frame = 2
 playing = true
 
 [node name="NormalHitbox" parent="." instance=ExtResource( 12 )]
+visible = false
 x = -4
 y = -7
 width = 8

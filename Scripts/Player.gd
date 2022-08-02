@@ -5,10 +5,20 @@ signal on_stamina_update
 signal on_max_stamina_update
 signal on_not_enough_stamina
 
+signal on_health_update
+signal on_max_health_update
+signal on_player_die
+
+onready var resource : GameResource = GameResource.new()
+
 export var max_stamina = 100
 export var stamina_per_second = 60
-export var stamina_recharge_time = 0.8
+export var stamina_regen_time = 0.8
 onready var stamina = max_stamina
+
+export var max_health = 100
+export var health_per_second = 5
+onready var health = max_health
 
 onready var animated_sprite = $AnimatedSprite
 onready var normal_hitbox = $NormalHitbox
@@ -29,7 +39,7 @@ var roll_force = 240
 var dodge_force = 160
 var cayote_time = 0.1
 var local_cayote_time = 0
-var local_stamina_recharge_time = 0
+var local_stamina_regen_time = 0
 var face : int setget ,get_face
 
 var on_ground : bool
@@ -39,8 +49,11 @@ var direction : int
 var attack_animations = {"Attack1" : 4, "Attack2" : 5}
 
 func _ready():
+	emit_signal("on_max_health_update", max_health)
+	emit_signal("on_health_update", health, 0, 0)
 	emit_signal("on_max_stamina_update", max_stamina)
-	emit_signal("on_stamina_update", stamina, 0)
+	emit_signal("on_stamina_update", stamina, 0, 0)
+
 
 
 func _process(delta):
@@ -55,9 +68,12 @@ func _process(delta):
 
 func _physics_process(delta):
 	
-	if local_stamina_recharge_time <= 0:
-		consume_stamina(-delta * stamina_per_second)
 	on_ground = Game.check_walls_collision(self, Vector2.DOWN)
+	
+	if local_stamina_regen_time <= 0:
+		consume_stamina(-delta * stamina_per_second)
+	
+	consume_health(-delta * health_per_second)
 	
 	if(was_on_ground && !on_ground):
 		local_cayote_time = cayote_time
@@ -67,7 +83,7 @@ func _physics_process(delta):
 	direction = get_direction()
 	
 	local_cayote_time -= delta
-	local_stamina_recharge_time -= delta
+	local_stamina_regen_time -= delta
 	
 	stateMachine.update(delta)
 
@@ -136,9 +152,17 @@ func drop_attack_rays_colliding():
 	
 func consume_stamina(amount):
 	if amount > 0:
-		local_stamina_recharge_time = stamina_recharge_time
+		local_stamina_regen_time = stamina_regen_time
 		if stamina < amount:
 			emit_signal("on_not_enough_stamina")
 	stamina -= amount
 	stamina = clamp(stamina, 0, max_stamina)
-	emit_signal("on_stamina_update", stamina, amount, stamina_recharge_time)
+	emit_signal("on_stamina_update", stamina, amount, stamina_regen_time)
+
+func consume_health(amount):
+	if amount > 0:
+		if health < amount:
+			emit_signal("on_player_die")
+	health -= amount
+	health = clamp(health, 0, max_health)
+	emit_signal("on_health_update", health, amount, 0.8)

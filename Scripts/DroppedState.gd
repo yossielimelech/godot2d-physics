@@ -15,6 +15,7 @@ func can_enter():
 
 func update(delta):
 	if _parent.on_ground:
+		_parent.consume_health(15)
 		if _parent.get_direction() != 0:
 			return _machine.Run
 		else:
