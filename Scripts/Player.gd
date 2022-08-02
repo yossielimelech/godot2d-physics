@@ -3,10 +3,12 @@ class_name Player
 
 signal on_stamina_update
 signal on_max_stamina_update
+signal on_not_enough_stamina
 
 export var max_stamina = 100
+export var stamina_per_second = 60
+export var stamina_recharge_time = 0.8
 onready var stamina = max_stamina
-onready var stamina_per_second = 5
 
 onready var animated_sprite = $AnimatedSprite
 onready var normal_hitbox = $NormalHitbox
@@ -27,6 +29,7 @@ var roll_force = 240
 var dodge_force = 160
 var cayote_time = 0.1
 var local_cayote_time = 0
+var local_stamina_recharge_time = 0
 var face : int setget ,get_face
 
 var on_ground : bool
@@ -52,7 +55,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	
-	consume_stamina(-delta * stamina_per_second)
+	if local_stamina_recharge_time <= 0:
+		consume_stamina(-delta * stamina_per_second)
 	on_ground = Game.check_walls_collision(self, Vector2.DOWN)
 	
 	if(was_on_ground && !on_ground):
@@ -63,6 +67,7 @@ func _physics_process(delta):
 	direction = get_direction()
 	
 	local_cayote_time -= delta
+	local_stamina_recharge_time -= delta
 	
 	stateMachine.update(delta)
 
@@ -130,9 +135,10 @@ func drop_attack_rays_colliding():
 	return false
 	
 func consume_stamina(amount):
+	if amount > 0:
+		local_stamina_recharge_time = stamina_recharge_time
+		if stamina < amount:
+			emit_signal("on_not_enough_stamina")
 	stamina -= amount
-	if stamina < 0:
-		stamina = 0
-	elif stamina > max_stamina:
-		stamina = max_stamina
-	emit_signal("on_stamina_update", stamina, amount)
+	stamina = clamp(stamina, 0, max_stamina)
+	emit_signal("on_stamina_update", stamina, amount, stamina_recharge_time)

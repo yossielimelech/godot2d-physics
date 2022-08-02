@@ -12,6 +12,10 @@
 
 [node name="StaminaBar" parent="Hud" instance=ExtResource( 5 )]
 process_priority = 1
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -1.0
+margin_bottom = -1.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 96, 72 )
@@ -134,4 +138,5 @@ position = Vector2( 128, 88 )
 jump_thru = true
 
 [connection signal="on_max_stamina_update" from="Player" to="Hud/StaminaBar" method="_on_max_value_update"]
+[connection signal="on_not_enough_stamina" from="Player" to="Hud/StaminaBar" method="_on_not_enough_resource"]
 [connection signal="on_stamina_update" from="Player" to="Hud/StaminaBar" method="_on_value_update"]

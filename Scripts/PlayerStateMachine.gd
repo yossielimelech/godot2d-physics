@@ -3,14 +3,14 @@ extends "res://Scripts/StateMachine.gd"
 class_name PlayerStateMachine
 onready var _parent = get_parent()
 
-onready var Attack = AttackState.new("Attack", _parent, self)
-onready var AirAttack = AirAttackState.new("AirAttack", _parent, self)
-onready var RollAttack = RollAttackState.new("RollAttack", _parent, self)
-onready var Dodge = DodgeState.new("Dodge", _parent, self)
-onready var Roll = RollState.new("Roll", _parent, self)
-onready var Jump = JumpState.new("Jump", _parent, self)
-onready var Run = RunState.new("Run", _parent, self)
-onready var DropAttack = DropAttackState.new("DropAttack", _parent, self)
+onready var Attack = AttackState.new("Attack", _parent, self, 25)
+onready var AirAttack = AirAttackState.new("AirAttack", _parent, self, 25)
+onready var RollAttack = RollAttackState.new("RollAttack", _parent, self, 25)
+onready var Dodge = DodgeState.new("Dodge", _parent, self, 10)
+onready var Roll = RollState.new("Roll", _parent, self, 10)
+onready var Jump = JumpState.new("Jump", _parent, self, 5)
+onready var Run = RunState.new("Run", _parent, self, 0)
+onready var DropAttack = DropAttackState.new("DropAttack", _parent, self, 25)
 onready var Dropped = DroppedState.new("Dropped", _parent, self)
 onready var Idle = IdleState.new("Idle", _parent, self)
 

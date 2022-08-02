@@ -5,6 +5,7 @@ var buffered_attack : bool
 var start_y_position : int
 
 func on_enter():
+	.on_enter()
 	InputManager.Roll.Consume()
 	_parent.velocity.x = -_parent.face * _parent.dodge_force
 	_parent.velocity.y = _parent.jump_force
@@ -13,11 +14,13 @@ func on_enter():
 func on_exit():
 	buffered_attack = false
 
-func _init(name: String, parent: Object, machine).(name, parent, machine):
+func _init(name: String, parent: Object, machine, stamina : int).(name, parent, machine, stamina):
 	pass
 
 
 func can_enter():
+	if !.can_enter():
+		return false
 	if _machine.State == _machine.Dodge || [_machine.Idle].has(_machine.State) && InputManager.Roll.Pressed && (_parent.on_ground || _parent.local_cayote_time > 0):
 		return true
 

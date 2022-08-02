@@ -53,30 +53,20 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
-"loop": false,
-"name": "Roll",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
-"loop": false,
-"name": "Jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 25 ) ],
 "loop": false,
 "name": "AirAttack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Run",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Run",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ) ],
 "loop": false,
@@ -107,6 +97,16 @@ animations = [ {
 "loop": false,
 "name": "Attack2",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 41 ) ],
+"loop": false,
+"name": "Roll",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 5.0
 } ]
 
 [node name="Player" type="Node2D"]

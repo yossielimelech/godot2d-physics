@@ -1,19 +1,19 @@
 extends "res://Scripts/State.gd"
 class_name AttackState
 
-var stamina_usage = 15
-
 func on_enter():
+	.on_enter()
 	InputManager.Attack.Consume()
-	_parent.consume_stamina(stamina_usage)
 
 func on_exit():
 	pass
 
-func _init(name: String, parent: Object, machine).(name, parent, machine):
+func _init(name: String, parent: Object, machine, stamina : int).(name, parent, machine, stamina):
 	pass
 
 func can_enter():
+	if !.can_enter():
+		return false
 	if [_machine.Run, _machine.Idle, _machine.Attack].has(_machine.State):
 		return InputManager.Attack.Pressed
 

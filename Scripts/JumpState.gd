@@ -2,17 +2,20 @@ extends "res://Scripts/State.gd"
 class_name JumpState
 
 func on_enter():
+	.on_enter()
 	InputManager.Jump.Consume()
 	_parent.velocity.y = _parent.jump_force
 
 func on_exit():
 	pass
 
-func _init(name: String, parent: Object, machine).(name, parent, machine):
+func _init(name: String, parent: Object, machine, stamina : int = 0).(name, parent, machine, stamina):
 	pass
 
 
 func can_enter():
+	if !.can_enter():
+		return false
 	if _machine.State == _machine.Jump || [_machine.Idle, _machine.Run].has(_machine.State) && InputManager.Jump.Pressed && (_parent.on_ground || _parent.local_cayote_time > 0):
 		return true
 

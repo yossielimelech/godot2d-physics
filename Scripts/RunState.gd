@@ -7,10 +7,12 @@ func on_enter():
 func on_exit():
 	pass
 
-func _init(name: String, parent: Object, machine).(name, parent, machine):
+func _init(name: String, parent: Object, machine, stamina : int).(name, parent, machine, stamina):
 	pass
 
 func can_enter():
+	if !.can_enter():
+		return false
 	return _parent.direction != 0 && [_machine.Idle, _machine.Run].has(_machine.State)
 
 func update(delta):

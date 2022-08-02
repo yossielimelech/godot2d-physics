@@ -5,15 +5,18 @@ var start_y_position : int
 var attack : bool
 
 func on_enter():
+	.on_enter()
 	start_y_position = _parent.global_position.y
 
 func on_exit():
 	attack = false
 	
-func _init(name: String, parent: Object, machine).(name, parent, machine):
+func _init(name: String, parent: Object, machine, stamina : int = 0).(name, parent, machine, stamina):
 	pass
 
 func can_enter():
+	if !.can_enter():
+		return false
 	return _machine.State == _machine.Dropped && InputManager.Attack.Pressed && !_parent.drop_attack_rays_colliding()
 
 func update(delta):
