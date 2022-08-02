@@ -7,14 +7,14 @@ signal on_resource_update
 
 export var resource_name = ''
 export var max_value = 100
-export var value = 100
 export var regen_per_second = 60
 export var pause_regen_time = 0.8
+onready var value = max_value
 
 var local_pause_regen_time = 0
 
 func _ready():
-	emit_signal("on_max_resource_update", max_value)
+	emit_signal("on_max_resource_update", max_value, (value / max_value) * 100)
 	emit_signal("on_resource_update", value, 0, 0)
 	
 func _physics_process(delta):

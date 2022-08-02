@@ -41,6 +41,7 @@ func update(delta):
 			for curr_state in states:
 				if states[curr_state].can_enter():
 					if _state != states[curr_state]:
+						_state.on_exit()
 						_state = states[curr_state]
 						_state.on_enter()
 

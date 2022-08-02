@@ -22,7 +22,7 @@ anchor_bottom = 0.0
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 98.0
-margin_bottom = 2.0
+margin_bottom = 5.0
 FGTheme = ExtResource( 8 )
 BGTheme = ExtResource( 9 )
 
@@ -31,9 +31,9 @@ process_priority = 1
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 2.0
-margin_top = 6.0
+margin_top = 7.0
 margin_right = 98.0
-margin_bottom = 8.0
+margin_bottom = 9.0
 FGTheme = ExtResource( 6 )
 BGTheme = ExtResource( 7 )
 
@@ -46,12 +46,12 @@ script = ExtResource( 11 )
 [node name="Stamina" type="Node2D" parent="Player/ResourceManager"]
 script = ExtResource( 10 )
 resource_name = "stamina"
-max_value = 120
-value = 120
+max_value = 86
 
 [node name="Health" type="Node2D" parent="Player/ResourceManager"]
 script = ExtResource( 10 )
 resource_name = "health"
+max_value = 120
 regen_per_second = 1
 
 [node name="Walls" type="Node" parent="."]
@@ -176,5 +176,5 @@ jump_thru = true
 [connection signal="on_not_enough_stamina" from="Player" to="Hud/StaminaBar" method="_on_not_enough_resource"]
 [connection signal="on_max_resource_update" from="Player/ResourceManager/Stamina" to="Hud/StaminaBar" method="_on_max_value_update"]
 [connection signal="on_resource_update" from="Player/ResourceManager/Stamina" to="Hud/StaminaBar" method="_on_value_update"]
-[connection signal="on_max_resource_update" from="Player/ResourceManager/Health" to="Hud/StaminaBar" method="_on_max_value_update"]
+[connection signal="on_max_resource_update" from="Player/ResourceManager/Health" to="Hud/HealthBar" method="_on_max_value_update"]
 [connection signal="on_resource_update" from="Player/ResourceManager/Health" to="Hud/HealthBar" method="_on_value_update"]
