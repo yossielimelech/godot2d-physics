@@ -171,9 +171,6 @@ offset = Vector2( -48, 0 )
 position = Vector2( 128, 88 )
 jump_thru = true
 
-[connection signal="on_health_update" from="Player" to="Hud/HealthBar" method="_on_value_update"]
-[connection signal="on_max_health_update" from="Player" to="Hud/HealthBar" method="_on_max_value_update"]
-[connection signal="on_not_enough_stamina" from="Player" to="Hud/StaminaBar" method="_on_not_enough_resource"]
 [connection signal="on_max_resource_update" from="Player/ResourceManager/Stamina" to="Hud/StaminaBar" method="_on_max_value_update"]
 [connection signal="on_resource_update" from="Player/ResourceManager/Stamina" to="Hud/StaminaBar" method="_on_value_update"]
 [connection signal="on_max_resource_update" from="Player/ResourceManager/Health" to="Hud/HealthBar" method="_on_max_value_update"]

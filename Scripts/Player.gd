@@ -7,9 +7,6 @@ signal on_player_die
 
 onready var resource : GameResource = GameResource.new()
 
-export var max_health = 100
-export var health_per_second = 1
-onready var health = max_health
 
 onready var resource_manager = $ResourceManager
 onready var animated_sprite = $AnimatedSprite
@@ -39,11 +36,6 @@ var was_on_ground : bool
 var direction : int
 
 var attack_animations = {"Attack1" : 4, "Attack2" : 5}
-
-func _ready():
-	emit_signal("on_max_health_update", max_health)
-	emit_signal("on_health_update", health, 0, 0)
-
 
 
 func _process(delta):
