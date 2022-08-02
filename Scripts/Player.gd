@@ -1,25 +1,17 @@
 extends "res://Scripts/Actor.gd"
 class_name Player
 
-signal on_stamina_update
-signal on_max_stamina_update
-signal on_not_enough_stamina
-
 signal on_health_update
 signal on_max_health_update
 signal on_player_die
 
 onready var resource : GameResource = GameResource.new()
 
-export var max_stamina = 100
-export var stamina_per_second = 60
-export var stamina_regen_time = 0.8
-onready var stamina = max_stamina
-
 export var max_health = 100
-export var health_per_second = 5
+export var health_per_second = 1
 onready var health = max_health
 
+onready var resource_manager = $ResourceManager
 onready var animated_sprite = $AnimatedSprite
 onready var normal_hitbox = $NormalHitbox
 onready var hitbox = normal_hitbox
@@ -51,8 +43,6 @@ var attack_animations = {"Attack1" : 4, "Attack2" : 5}
 func _ready():
 	emit_signal("on_max_health_update", max_health)
 	emit_signal("on_health_update", health, 0, 0)
-	emit_signal("on_max_stamina_update", max_stamina)
-	emit_signal("on_stamina_update", stamina, 0, 0)
 
 
 
@@ -69,11 +59,6 @@ func _process(delta):
 func _physics_process(delta):
 	
 	on_ground = Game.check_walls_collision(self, Vector2.DOWN)
-	
-	if local_stamina_regen_time <= 0:
-		consume_stamina(-delta * stamina_per_second)
-	
-	consume_health(-delta * health_per_second)
 	
 	if(was_on_ground && !on_ground):
 		local_cayote_time = cayote_time
@@ -150,19 +135,8 @@ func drop_attack_rays_colliding():
 			return true
 	return false
 	
-func consume_stamina(amount):
-	if amount > 0:
-		local_stamina_regen_time = stamina_regen_time
-		if stamina < amount:
-			emit_signal("on_not_enough_stamina")
-	stamina -= amount
-	stamina = clamp(stamina, 0, max_stamina)
-	emit_signal("on_stamina_update", stamina, amount, stamina_regen_time)
+func consume_resource(resource, amount):
+	resource_manager.update(resource, amount)
 
-func consume_health(amount):
-	if amount > 0:
-		if health < amount:
-			emit_signal("on_player_die")
-	health -= amount
-	health = clamp(health, 0, max_health)
-	emit_signal("on_health_update", health, amount, 0.8)
+func can_consume(resource, amount):
+	return resource_manager.can_consume(resource, amount)
